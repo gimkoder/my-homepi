@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #121a16;
+            color: #d5d8ce;
+            font-family: Arial, "Noto Sans KR", sans-serif;
+            font-size: 13px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 0 14px;
+        }
+
+        .brand {
+            flex: 0 0 auto;
+            margin-right: 26px;
+            color: #a8b8a0;
+            font: italic 20px Georgia, serif;
+            letter-spacing: 0.04em;
+        }
+
+        .menu button {
+            flex: 0 0 auto;
+            padding: 21px 13px 18px;
+            border: 0;
+            border-bottom: 2px solid transparent;
+            background: none;
+            color: #9ba59b;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .menu button:hover,
+        .menu button.active {
+            color: #d5d8ce;
+            border-bottom-color: #7e9680;
+        }
+
+        .menu button.active {
+            background: #1a2420;
+        }
+
+        .index {
+            margin-right: 7px;
+            color: #7e9680;
+            font: 10px Georgia, serif;
+        }
+
+        @media (max-width: 600px) {
+            .brand {
+                margin-right: 10px;
+                font-size: 17px;
+            }
+
+            .menu button {
+                padding: 20px 10px 17px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="menu" aria-label="사건 페이지 선택">
+        <div class="brand">Frog Boys / 1991</div>
+        <button class="active" data-target="overview"><span class="index">01</span>사건 개요</button>
+        <button data-target="timeline"><span class="index">02</span>타임라인</button>
+        <button data-target="investigation"><span class="index">03</span>수사 과정</button>
+        <button data-target="mysteries"><span class="index">04</span>미해결 쟁점</button>
+        <button data-target="social_impact"><span class="index">05</span>사회적 영향</button>
+    </nav>
+
+    <script>
+        const menuButtons = document.querySelectorAll("button[data-target]");
+
+        menuButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                menuButtons.forEach(function (item) {
+                    item.classList.remove("active");
+                });
+
+                button.classList.add("active");
+
+                parent.postMessage({
+                    type: "frog-scroll",
+                    target: button.dataset.target
+                }, "*");
+            });
+        });
+    </script>
+</body>
+</html>

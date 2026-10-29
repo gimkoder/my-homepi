@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   사건 개요 | 개구리소년 사건 기록
+  </title>
+  <link href="../content.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <main class="section">
+   <header class="section-head">
+    <div>
+     <div class="eyebrow">
+      CASE FILE / 01
+     </div>
+     <h1>
+      사건 개요
+     </h1>
+    </div>
+    <span class="number">
+     01
+    </span>
+   </header>
+   <p class="quote">
+    1991년 대구에서 초등학생 다섯 명이 실종되고, 오랜 시간이 지난 뒤 유해가 발견된 장기 미제 사건이다.
+   </p>
+   <figure class="reference-image">
+    <img alt="와룡산을 떠올리게 하는 산길 참고 이미지" src="../images/mountain_path.jpg"/>
+   </figure>
+   <h2>
+    사건의 핵심
+   </h2>
+   <p>
+    일명 ‘개구리소년 사건’은 1991년 3월 26일 대구에서 초등학생
+    다섯 명의 행방이 끊긴 사건이다. 당시 아이들이 와룡산에
+    도롱뇽 알 등을 찾으러 갔다는 설명이 널리 알려져 있다.
+    실종 당일 처음에는 여섯 명이 함께 있었으나, 김태룡 군은
+    먼저 돌아갔고 나머지 다섯 명이 실종된 것으로 알려져 있다.
+    다만 사건 당일의 세부적인 이동 경로와 정확한 실종 경위는
+    확인된 사실과 당시 진술을 구분해 살펴볼 필요가 있다.
+   </p>
+   <div class="columns">
+    <div><br><br>
+     <h3>
+      무엇이 알려져 있는가
+     </h3>
+     <ul class="plain-list">
+      <li>
+       실종일은 1991년 3월 26일이다.
+      </li>
+      <li>
+       실종 아동은 다섯 명이다.
+      </li>
+      <li>
+       2002년 와룡산에서 아이들의 유해가 발견되었다.
+      </li>
+      <li>
+       사건의 정확한 경위와 책임자는 공식적으로 밝혀지지 않았다.
+      </li>
+     </ul>
+    </div>
+    <div><br><br>
+     <h3>
+      무엇을 구분해야 하는가
+     </h3>
+     <ul class="plain-list">
+      <li>
+       <b>
+        확인된 사실:
+       </b>
+       실종, 장기간의 수색, 유해 발견, 미해결 상태
+      </li>
+      <li>
+       <b>
+        쟁점:
+       </b>
+       사망 경위와 유해 주변 정황에 대한 해석
+      </li>
+      <li>
+       <b>
+        추측:
+       </b>
+       근거가 충분히 확인되지 않은 범인&middot;동기 단정
+      </li>
+     </ul>
+    </div>
+   </div><br><br>
+   <h2>
+    사건의 경위 요약
+   </h2>
+   <p>
+1991년 3월 26일, 대구에 거주하던 초등학생 다섯 명이 집을 나선 뒤 실종되었다. 아이들은 인근 와룡산에 도롱뇽 알을 찾으러 갔던 것으로 알려졌으며, 가족과 경찰의 수색에도 행방을 찾지 못했다.
+
+실종 이후 오랜 시간이 흐른 2002년 9월 26일, 와룡산에서 아이들의 유해가 발견되었다. 유해에 대한 감식 과정에서 외부 충격에 의한 손상 가능성이 제기되면서 사건은 단순 실종이 아닌 타살 의혹과 함께 다시 주목받았다.
+
+이후 경찰은 재수사와 증거 분석을 진행했지만, 범행 경위와 범인을 명확하게 밝혀내지 못했다. 살인죄의 공소시효도 2006년 3월 만료되면서 사건은 법적 처벌의 어려움까지 안게 되었으며, 현재까지도 정확한 진실이 밝혀지지 않은 미제 사건으로 남아 있다.
+   </p>
+   <hr class="rule"/>
+   <p class="footnote">
+   </p>
+  </main>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const selectors = [
+        "p",
+        "li",
+        "td",
+        "blockquote",
+        ".evidence-line div"
+    ];
+
+    const excluded = "script, style, noscript, textarea, input, button, a, .sentence-highlight";
+
+    function highlightSentences(element) {
+        if (element.closest(excluded)) return;
+
+        const walker = document.createTreeWalker(
+            element,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode(node) {
+                    return node.nodeValue.trim()
+                        ? NodeFilter.FILTER_ACCEPT
+                        : NodeFilter.FILTER_REJECT;
+                }
+            }
+        );
+
+        const nodes = [];
+        while (walker.nextNode()) {
+            nodes.push(walker.currentNode);
+        }
+
+        nodes.forEach(function (node) {
+            const text = node.nodeValue;
+            const parts = text.match(/[^.!?。！？]+(?:[.!?。！？]+["'”’)]*)?|[\s]+/g);
+
+            if (!parts || !parts.some(part => /[.!?。！？]/.test(part))) return;
+
+            const fragment = document.createDocumentFragment();
+
+            parts.forEach(function (part) {
+                if (/^[\s]+$/.test(part)) {
+                    fragment.appendChild(document.createTextNode(part));
+                    return;
+                }
+
+                const span = document.createElement("span");
+                span.className = "sentence-highlight";
+                span.textContent = part;
+                fragment.appendChild(span);
+            });
+
+            node.parentNode.replaceChild(fragment, node);
+        });
+    }
+
+    document.querySelectorAll(selectors.join(",")).forEach(highlightSentences);
+});
+</script>
+ </body>
+</html>

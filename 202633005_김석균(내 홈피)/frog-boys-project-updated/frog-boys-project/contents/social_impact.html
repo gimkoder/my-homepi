@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   사회적 영향과 교훈 | 개구리소년 사건 기록
+  </title>
+  <link href="../content.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <main class="section">
+   <header class="section-head">
+    <div>
+     <div class="eyebrow">
+      CASE FILE / 05
+     </div>
+     <h1>
+      사회적 영향과 교훈
+     </h1>
+    </div>
+    <span class="number">
+     05
+    </span>
+   </header>
+   <p class="quote">
+    이 사건은 실종 아동 수색, 언론의 보도 방식, 장기 미제 사건의 기록과 가족의 권리를 돌아보게 한다.
+   </p>
+   <figure class="reference-image">
+    <img alt="추모의 의미를 표현한 참고 이미지" src="../images/memorial_place.jpg"/>
+   </figure>
+   <div class="columns">
+    <div>
+     <h3>
+      가족과 지역사회
+     </h3>
+     <p>
+      가족에게 실종은 긴 시간 동안 지속되는 고통이다. 유해 발견 이후에도 사건의 경위가 밝혀지지 않으면 상실과 의문이 함께 남는다. 사건을 다루는 콘텐츠는 가족의 감정을 소비하거나 자극적인 표현을 반복하지 않아야 한다.
+     </p>
+    </div>
+    <div>
+     <h3>
+      언론과 대중의 역할
+     </h3>
+     <p>
+      보도는 제보를 모으고 사회적 관심을 유지하는 역할을 할 수 있다. 반면 확인되지 않은 가설을 반복하면 오해가 커질 수 있다. 보도 시점, 인용 주체, 반론과 정정 여부를 살피는 미디어 리터러시가 필요하다.
+     </p>
+    </div>
+    <div>
+     <h3>
+      기록과 수사
+     </h3>
+     <p>
+      실종 초기의 기록, 제보 보존, 증거 관리와 기관 간 협력은 장기 미제 사건에서 중요하다. 과거의 사건을 재검토할 때는 당시의 자료와 현재의 과학수사 기준을 함께 고려해야 한다.
+     </p>
+    </div>
+    <div>
+     <h3>
+      콘텐츠 제작의 책임
+     </h3>
+     <p>
+      사건을 소개하는 웹사이트는 사실&middot;해석&middot;추측을 명확히 구분하고, 피해 아동의 존엄을 우선해야 한다. 자극적인 재연 이미지나 확인되지 않은 범인 추정은 피하고 출처를 공개해야 한다.
+     </p>
+    </div>
+   </div><br><br>
+   <h2>
+    이 사건에서 얻을 수 있는 교훈
+   </h2>
+   <ol class="plain-list">
+    <li>
+     실종 직후의 정확한 신고와 기록, 신속한 수색이 중요하다.
+    </li>
+    <li>
+     제보와 증거를 체계적으로 보존하고 검증해야 한다.
+    </li>
+    <li>
+     미디어 이용자는 제목만 보지 말고 원문과 출처를 확인해야 한다.
+    </li>
+    <li>
+     피해자와 가족을 존중하고, 추측을 사실처럼 확산하지 않아야 한다.
+    </li>
+   </ol>
+   <hr class="rule"/>
+   <p class="footnote">
+   </p>
+  </main>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const selectors = [
+        "p",
+        "li",
+        "td",
+        "blockquote",
+        ".evidence-line div"
+    ];
+
+    const excluded = "script, style, noscript, textarea, input, button, a, .sentence-highlight";
+
+    function highlightSentences(element) {
+        if (element.closest(excluded)) return;
+
+        const walker = document.createTreeWalker(
+            element,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode(node) {
+                    return node.nodeValue.trim()
+                        ? NodeFilter.FILTER_ACCEPT
+                        : NodeFilter.FILTER_REJECT;
+                }
+            }
+        );
+
+        const nodes = [];
+        while (walker.nextNode()) {
+            nodes.push(walker.currentNode);
+        }
+
+        nodes.forEach(function (node) {
+            const text = node.nodeValue;
+            const parts = text.match(/[^.!?。！？]+(?:[.!?。！？]+["'”’)]*)?|[\s]+/g);
+
+            if (!parts || !parts.some(part => /[.!?。！？]/.test(part))) return;
+
+            const fragment = document.createDocumentFragment();
+
+            parts.forEach(function (part) {
+                if (/^[\s]+$/.test(part)) {
+                    fragment.appendChild(document.createTextNode(part));
+                    return;
+                }
+
+                const span = document.createElement("span");
+                span.className = "sentence-highlight";
+                span.textContent = part;
+                fragment.appendChild(span);
+            });
+
+            node.parentNode.replaceChild(fragment, node);
+        });
+    }
+
+    document.querySelectorAll(selectors.join(",")).forEach(highlightSentences);
+});
+</script>
+ </body>
+</html>

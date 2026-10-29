@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개구리소년 사건 기록</title>
+    <link rel="stylesheet" href="content.css">
+    <style>
+        :root {
+            --ink: #d5d8ce;
+            --muted: #9ba59b;
+            --bg: #111916;
+            --panel: #1a2420;
+            --line: #35463c;
+            --moss: #7e9680;
+            --moss-bright: #a8b8a0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: Arial, "Noto Sans KR", sans-serif;
+        }
+
+        .app {
+            height: 100vh;
+            display: grid;
+            grid-template-rows: 66px 178px minmax(0, 1fr);
+        }
+
+        .topbar {
+            min-width: 0;
+            background: #121a16;
+        }
+
+        .topbar iframe,
+        .profiles-frame {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .profiles {
+            min-width: 0;
+            background: #151e19;
+        }
+
+        .content-area {
+            position: relative;
+            min-width: 0;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+
+        /* iframe 하나가 화면 너비 전체를 차지하므로 옆 콘텐츠가 보이지 않는다. */
+        .track iframe {
+            flex: 0 0 100%;
+            min-width: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            scroll-snap-align: start;
+            background: var(--bg);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            left: 18px;
+            bottom: 12px;
+            color: var(--muted);
+            background: #111916cc;
+            padding: 4px 8px;
+            font-size: 11px;
+            pointer-events: none;
+        }
+
+        @media (max-width: 700px) {
+            .app {
+                grid-template-rows: 62px 152px minmax(0, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="app">
+        <header class="topbar">
+            <iframe src="menu_box.html" title="사건 콘텐츠 메뉴"></iframe>
+        </header>
+
+        <section class="profiles">
+            <iframe
+                class="profiles-frame"
+                src="profiles.html"
+                title="실종 아동 다섯 명 프로필">
+            </iframe>
+        </section>
+
+        <section class="content-area">
+            <div class="track" id="contentTrack" aria-label="사건 기록 콘텐츠 가로 이동">
+                <iframe id="overview" src="contents/overview.html" title="사건 개요"></iframe>
+                <iframe id="timeline" src="contents/timeline.html" title="사건 타임라인"></iframe>
+                <iframe id="investigation" src="contents/investigation.html" title="수사 과정"></iframe>
+                <iframe id="mysteries" src="contents/mysteries.html" title="주요 쟁점과 미해결 의문"></iframe>
+                <iframe id="social_impact" src="contents/social_impact.html" title="사회적 영향과 교훈"></iframe>
+            </div>
+            <div class="scroll-hint">← 메뉴를 선택하거나 가로로 이동하세요 →</div>
+        </section>
+    </main>
+
+    <script src="content.js"></script>
+</body>
+</html>

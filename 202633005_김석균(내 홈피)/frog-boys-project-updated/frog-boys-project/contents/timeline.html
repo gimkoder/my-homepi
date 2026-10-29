@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="ko">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   사건 타임라인 | 개구리소년 사건 기록
+  </title>
+  <link href="../content.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <main class="section">
+   <header class="section-head">
+    <div>
+     <div class="eyebrow">
+      CASE FILE / 02
+     </div>
+     <h1>
+      사건 타임라인
+     </h1>
+    </div>
+    <span class="number">
+     02
+    </span>
+   </header>
+   <p class="quote">
+    1991년 3월 26일, 다섯 아이의 실종으로 시작된 사건은 2002년 와룡산에서 유해가 발견되며 새로운 국면을 맞이했다.  
+이후 이어진 수사와 공소시효 만료에도 사건의 진상은 밝혀지지 않은 채 미제로 남아 있다.
+   </p>
+   <figure class="reference-image">
+    <img alt="산자락과 마을 풍경 참고 이미지" src="../images/village_mountain.jpg"/>
+   </figure>
+   <div class="timeline">
+    <article class="event">
+     <div class="date">
+      1991년 3월 26일
+     </div>
+     <h3>
+      어린이 다섯 명 실종
+     </h3>
+     <p>
+      대구에서 초등학생 다섯 명이 실종되었다. 이후 가족과 경찰, 지역사회가 장기간 수색에 나섰다.
+     </p>
+    </article>
+    <article class="event">
+     <div class="date">
+      1991년 이후
+     </div>
+     <h3>
+      전국적인 관심과 수색
+     </h3>
+     <p>
+      사건은 전국적인 관심을 받았고 여러 제보와 수색이 이어졌다. 그러나 아이들의 행방은 오랫동안 확인되지 않았다.
+     </p>
+    </article>
+    <article class="event">
+     <div class="date">
+      2002년 9월 26일
+     </div>
+     <h3>
+      와룡산에서 유해 발견
+     </h3>
+     <p>
+      실종 장소로 알려진 와룡산 일대에서 아이들의 유해가 발견되었다. 유해 발견은 사건의 중요한 전환점이 되었지만, 사망 경위를 둘러싼 의문은 해소되지 않았다.
+     </p>
+    </article>
+    <article class="event">
+     <div class="date">
+      2000년대 초반
+     </div>
+     <h3>
+      사망 원인과 수사 결과를 둘러싼 논란
+     </h3>
+     <p>
+      유해와 주변 정황에 대한 해석, 수사 과정의 적절성 등을 두고 다양한 의견이 제기되었다. 각 주장은 근거와 출처를 따져 구분해야 한다.
+     </p>
+    </article>
+    <article class="event">
+     <div class="date">
+      2006년 3월
+     </div>
+     <h3>
+      당시 살인죄 공소시효 만료 논란
+     </h3>
+     <p>
+        당시 살인죄의 공소시효는 2006년 3월 25일 만료되었다.
+        이후 살인죄 등의 공소시효를 폐지하는 법 개정이 이루어졌지만,
+        이 사건에 소급 적용되어 이미 만료된 공소시효가 되살아난 것은 아니다.
+        따라서 공소시효 만료 당시의 법률과 이후의 법 개정 내용을 구분해서
+        이해해야 한다.
+    </p>
+    </article>
+    <article class="event">
+     <div class="date">
+      2010년대~2020년대
+     </div>
+     <h3>
+      재수사 요구와 새로운 주장
+     </h3>
+     <p>
+      사건을 다시 살펴야 한다는 요구와 사망 원인에 대한 주장이 이어졌다. 공개된 주장만으로 사건의 진상이 확정된 것은 아니다.
+     </p>
+    </article>
+   </div>
+   
+   <hr class="rule"/>
+   <p class="footnote">
+   </p>
+  </main>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const selectors = [
+        "p",
+        "li",
+        "td",
+        "blockquote",
+        ".evidence-line div"
+    ];
+
+    const excluded = "script, style, noscript, textarea, input, button, a, .sentence-highlight";
+
+    function highlightSentences(element) {
+        if (element.closest(excluded)) return;
+
+        const walker = document.createTreeWalker(
+            element,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode(node) {
+                    return node.nodeValue.trim()
+                        ? NodeFilter.FILTER_ACCEPT
+                        : NodeFilter.FILTER_REJECT;
+                }
+            }
+        );
+
+        const nodes = [];
+        while (walker.nextNode()) {
+            nodes.push(walker.currentNode);
+        }
+
+        nodes.forEach(function (node) {
+            const text = node.nodeValue;
+            const parts = text.match(/[^.!?。！？]+(?:[.!?。！？]+["'”’)]*)?|[\s]+/g);
+
+            if (!parts || !parts.some(part => /[.!?。！？]/.test(part))) return;
+
+            const fragment = document.createDocumentFragment();
+
+            parts.forEach(function (part) {
+                if (/^[\s]+$/.test(part)) {
+                    fragment.appendChild(document.createTextNode(part));
+                    return;
+                }
+
+                const span = document.createElement("span");
+                span.className = "sentence-highlight";
+                span.textContent = part;
+                fragment.appendChild(span);
+            });
+
+            node.parentNode.replaceChild(fragment, node);
+        });
+    }
+
+    document.querySelectorAll(selectors.join(",")).forEach(highlightSentences);
+});
+</script>
+ </body>
+</html>
